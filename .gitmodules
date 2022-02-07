@@ -1,0 +1,12 @@
+[submodule "ui-layer"]
+	path = ui-layer
+	url = https://github.com/beckn/dhp-bap-ui-layer.git
+[submodule "client-layer"]
+	path = client-layer
+	url = https://github.com/beckn/dhp-bap-client-layer.git
+[submodule "protocol-layer"]
+	path = protocol-layer
+	url = https://github.com/beckn/dhp-bap-protocol-layer.git
+[submodule "protocol-dtos"]
+	path = protocol-dtos
+	url = https://github.com/beckn/beckn-protocol-dtos.git
