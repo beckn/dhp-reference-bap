@@ -45,6 +45,7 @@ services:
     # Provide configuration through environment variables
     environment:
       - DATABASE_URL=mongodb://database:27017/sandbox_dhp_bap
+      - PRIVATE_KEY=somekey
     # The protocol helper requires mongo to be running
     depends_on:
       database:
