@@ -1,7 +1,7 @@
 # dhp-reference-bap
 Reference BAP using DHP created from BIAB reference BAP.
 
-We will need to EC2 machines for two setups one for API Layer and another for UI Layer.
+We will need to provision two EC2 machines for two setups one for API Layer and another for UI Layer.
 
 > **Prereuisites for EC2 Machines:**
 >
@@ -18,14 +18,14 @@ $ sudo yum install -y certbot
 
 Set Up instaructions for Client and Protocol layer 
 
-Inside docker-setup directroy 
+Inside docker-setup directory 
 
-We need first build base dtos layer so that client and protocol layer can use the DTOs jar.
+First, We need to build base dtos layer so that client and protocol layer can use the DTOs jar.
 ```bash
 $ docker build -t bap-base -f base.dockerfile .
 ```
 
-Once we have base image build we can move forward and generate certifactes.
+Once we have base image build we can move forward and generate SSL certifactes.
 
 Specify server name in nginx/data/nginx/app.conf file and use certbot to generate SSL certs, for example we specified api.healthcarebap.becknprotocol.io;
 Change the same ofr other entries in app.conf
@@ -52,10 +52,8 @@ $ docker-compose up -d
 
 ## Setup 2. Preparing Setup for UI-Layer
 
-One machines where we run storefront setup
-
 Specify server name in nginx/data/nginx/app.conf file and use certbot to generate SSL certs, for example we specified healthcarebap.becknprotocol.io;
-Change the other entries in app.conf
+Replace other entries in app.conf
 
 ```bash
 # generate certs
