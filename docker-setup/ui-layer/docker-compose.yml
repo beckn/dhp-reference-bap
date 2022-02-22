@@ -9,7 +9,6 @@ services:
     volumes:
       - ./nginx/data/nginx:/etc/nginx/conf.d
       - ./nginx/data/certbot/conf:/etc/letsencrypt
-      - ./nginx/data/certbot/www:/var/www/certbot      
     network_mode: host
     environment:
       - MAPS_KEY=somekey
