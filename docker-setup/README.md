@@ -42,7 +42,7 @@ $ sudo cp etc/letsencrypt/archive/api.healthcarebap.becknprotocol.io data/certbo
 $ sudo chown -R ec2-user:ec2-user data
 ```
 
-Replace PRIVATE_KEY indocker-compose.yml and Bring API Layer (client plust protocol)
+Replace PRIVATE_KEY in docker-compose.yml and Bring API Layer
 
 ```bash
 $ cd docker-setup/proto-client-layer
