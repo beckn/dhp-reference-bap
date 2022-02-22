@@ -1,0 +1,62 @@
+# docker-compose.yaml
+# Builds and runs all three components of the BAP.
+
+version: '3'
+
+services:
+  # The Mongo database instance, required by the protocol helper.
+  database:
+    container_name: database
+    hostname: database
+    # Pull the image from the official repos.
+    image: mongo
+    # Expose it on localhost port 27017.
+    network_mode: host
+    command: ['--bind_ip', '0.0.0.0']
+
+  # The Beckn protocol client.
+  client:
+    container_name: client
+    hostname: client
+    # Build it from the docker file in the `client/` directory.
+    build:
+      context: client
+      dockerfile: client.dockerfile
+    network_mode: host
+    # Expose it on localhost port 9001.
+    # Provide configuration through environment variables
+    environment:
+      - DATABASE_URL=mongodb://database:27017/sandbox_dhp_client
+    # The protocol helper requires mongo to be running
+    depends_on:
+      database:
+        condition: service_started
+
+  # The Beckn protocol helper.
+  protocol-helper:
+    container_name: protocol-helper
+    hostname: protocol-helper
+    # Build it from the docker file in the `protocol-helper/` directory.
+    build:
+      context: protocol-helper
+      dockerfile: protocol-helper.dockerfile
+    network_mode: host
+    # Expose it on localhost port 9002.
+    # Provide configuration through environment variables
+    environment:
+      - DATABASE_URL=mongodb://database:27017/sandbox_dhp_bap
+    # The protocol helper requires mongo to be running
+    depends_on:
+      database:
+        condition: service_started
+
+# Nginx for api gateway
+  nginx:
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx/data/nginx:/etc/nginx/conf.d
+      - ./nginx/data/certbot/conf:/etc/letsencrypt
+      - ./nginx/data/certbot/www:/var/www/certbot
+    network_mode: host
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
