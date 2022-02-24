@@ -38,6 +38,7 @@ $ cd /etc/letsencrypt/archive/api.healthcarebap.becknprotocol.io
 cert1.pem  chain1.pem  fullchain1.pem  privkey1.pem
 # rename certs and copy for use
 $ mv cert1.pem cert.pem; mv chain1.pem chain.pem ; mv fullchain1.pem fullchain.pem; mv privkey1.pem privkey.pem
+$ cd docker-setup/proto-client-layer/nginx
 $ sudo cp etc/letsencrypt/archive/api.healthcarebap.becknprotocol.io data/certbot/conf/live/
 $ sudo chown -R ec2-user:ec2-user data
 ```
