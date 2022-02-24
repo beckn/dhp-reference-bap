@@ -72,6 +72,6 @@ $ sudo chown -R ec2-user:ec2-user data
 Replace MAPS_KEY in docker-compose.yml and Bring UI Layer
 
 ```bash
-$ cd docker-setup/ui-layer
+ cd docker-setup/ui-layer
 $ docker-compose up -d 
 ```
